@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Insania.Biology.Contracts\Insania.Biology.Contracts.csproj" />
+    <ProjectReference Include="..\Insania.Biology.Database\Insania.Biology.Database.csproj" />
+    <ProjectReference Include="..\Insania.Biology.Entities\Insania.Biology.Entities.csproj" />
+    <ProjectReference Include="..\Insania.Biology.Messages\Insania.Biology.Messages.csproj" />
+    <ProjectReference Include="..\Insania.Biology.Models\Insania.Biology.Models.csproj" />
+  </ItemGroup>
+
+</Project>
