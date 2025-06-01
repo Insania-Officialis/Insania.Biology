@@ -8,9 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="Insania.Shared.Models" Version="1.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.5" />
+    <PackageReference Include="Microsoft.OpenApi" Version="1.6.24" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Insania.Biology.Database\Insania.Biology.Database.csproj" />
     <ProjectReference Include="..\Insania.Biology.Entities\Insania.Biology.Entities.csproj" />
   </ItemGroup>
 

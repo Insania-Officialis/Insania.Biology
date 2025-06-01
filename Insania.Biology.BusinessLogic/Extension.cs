@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
+using Insania.Biology.Contracts.BusinessLogic;
 using Insania.Biology.DataAccess;
 
 namespace Insania.Biology.BusinessLogic;
@@ -17,5 +18,7 @@ public static class Extension
     public static IServiceCollection AddBiologyBL(this IServiceCollection services) =>
         services
             .AddBiologyDAO() //сервисы работы с данными в зоне биологии
+            .AddScoped<IRacesBL, RacesBL>() //сервис работы с бизнес-логикой рас
+            .AddScoped<INationsBL, NationsBL>() //сервис работы с бизнес-логикой наций
         ;
 }

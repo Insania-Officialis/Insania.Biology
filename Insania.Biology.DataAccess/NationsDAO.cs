@@ -54,6 +54,39 @@ public class NationsDAO(ILogger<NationsDAO> logger, BiologyContext context) : IN
             //Проброс исключения
             throw;
         }
+
+    }
+
+    /// <summary>
+    /// Метод получения списка наций
+    /// </summary>
+    /// <param cref="long?" name="raceId">Идентификатор расы</param>
+    /// <returns cref="List{Nation}">Список наций</returns>
+    /// <exception cref="Exception">Исключение</exception>
+    public async Task<List<Nation>> GetList(long? raceId)
+    {
+        try
+        {
+            //Логгирование
+            _logger.LogInformation(InformationMessages.EnteredGetListNationsMethod);
+
+            //Проверки
+            if (raceId == null) throw new Exception(ErrorMessages.EmptyRace);
+
+            //Получение данных из бд
+            List<Nation> data = await _context.Nations.Where(x => x.DateDeleted == null && x.RaceId == raceId).ToListAsync();
+
+            //Возврат результата
+            return data;
+        }
+        catch (Exception ex)
+        {
+            //Логгирование
+            _logger.LogError("{text}: {error}", ErrorMessages.Error, ex.Message);
+
+            //Проброс исключения
+            throw;
+        }
     }
     #endregion
 }

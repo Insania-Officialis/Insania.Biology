@@ -10,7 +10,7 @@ namespace Insania.Biology.Entities;
 /// <summary>
 /// Модель сущности нации
 /// </summary>
-[Table("r_nations")]
+[Table("d_nations")]
 [Comment("Нации")]
 public class Nation : Compendium
 {

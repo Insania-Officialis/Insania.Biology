@@ -13,6 +13,7 @@ using Insania.Biology.BusinessLogic;
 using Insania.Biology.DataAccess;
 using Insania.Biology.Database.Contexts;
 using Insania.Biology.Models.Settings;
+using Insania.Biology.Models.Mapper;
 
 namespace Insania.Biology.Tests.Base;
 
@@ -63,6 +64,9 @@ public abstract class BaseTest
             .WriteTo.Debug()
             .CreateLogger();
         services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(Log.Logger, dispose: true));
+
+        //Добавление параметров преобразования моделей
+        services.AddAutoMapper(typeof(BiologyMappingProfile));
 
         //Добавление параметров инициализации данных
         IConfigurationSection? initializationDataSettings = configuration.GetSection("InitializationDataSettings");

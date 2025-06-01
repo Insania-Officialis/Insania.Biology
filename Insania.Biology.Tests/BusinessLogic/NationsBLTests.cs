@@ -1,23 +1,23 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using Insania.Biology.Contracts.DataAccess;
-using Insania.Biology.Entities;
+using Insania.Biology.Contracts.BusinessLogic;
 using Insania.Biology.Messages;
 using Insania.Biology.Tests.Base;
+using Insania.Shared.Models.Responses.Base;
 
-namespace Insania.Biology.Tests.DataAccess;
+namespace Insania.Biology.Tests.BusinessLogic;
 
 /// <summary>
-/// Тесты сервиса работы с данными рас
+/// Тесты сервиса работы с бизнес-логикой наций
 /// </summary>
 [TestFixture]
-public class RacesDAOTests : BaseTest
+public class NationsBLTests : BaseTest
 {
     #region Поля
     /// <summary>
-    /// Сервис работы с данными рас
+    /// Сервис работы с бизнес-логикой наций
     /// </summary>
-    private IRacesDAO RacesDAO { get; set; }
+    private INationsBL NationsBL { get; set; }
     #endregion
 
     #region Общие методы
@@ -28,7 +28,7 @@ public class RacesDAOTests : BaseTest
     public void Setup()
     {
         //Получение зависимости
-        RacesDAO = ServiceProvider.GetRequiredService<IRacesDAO>();
+        NationsBL = ServiceProvider.GetRequiredService<INationsBL>();
     }
 
     /// <summary>
@@ -43,46 +43,30 @@ public class RacesDAOTests : BaseTest
 
     #region Методы тестирования
     /// <summary>
-    /// Тест метода получения списка рас
-    /// </summary>
-    [Test]
-    public async Task GetListTest()
-    {
-        try
-        {
-            //Получение результата
-            List<Race>? result = await RacesDAO.GetList();
-
-            //Проверка результата
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result, Is.Not.Empty);
-        }
-        catch (Exception)
-        {
-            //Проброс исключения
-            throw;
-        }
-    }
-
-    /// <summary>
-    /// Тест метода получения расы
+    /// Тест метода получения списка наций
     /// </summary>
     /// <param cref="long?" name="raceId">Идентификатор расы</param>
     [TestCase(null)]
     [TestCase(-1)]
+    [TestCase(2)]
     [TestCase(1)]
-    public async Task GetItemTest(long? raceId)
+    public async Task GetListTest(long? raceId)
     {
         try
         {
             //Получение результата
-            Race? result = await RacesDAO.GetItem(raceId);
+            BaseResponseList? result = await NationsBL.GetList(raceId);
 
             //Проверка результата
+            Assert.That(result, Is.Not.Null);
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Success, Is.True);
+                Assert.That(result.Items, Is.Not.Null);
+            });
             switch (raceId)
             {
-                case -1: Assert.That(result, Is.Null); break;
-                case 1: Assert.That(result, Is.Not.Null); break;
+                case 1: Assert.That(result.Items, Is.Not.Empty); break;
                 default: throw new Exception(ErrorMessages.NotFoundTestCase);
             }
         }
@@ -92,6 +76,8 @@ public class RacesDAOTests : BaseTest
             switch (raceId)
             {
                 case null: Assert.That(ex.Message, Is.EqualTo(ErrorMessages.EmptyRace)); break;
+                case -1: Assert.That(ex.Message, Is.EqualTo(ErrorMessages.NotFoundRace)); break;
+                case 2: Assert.That(ex.Message, Is.EqualTo(ErrorMessages.DeletedRace)); break;
                 default: throw;
             }
         }

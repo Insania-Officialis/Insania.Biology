@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insania.Biology.Entities", "Insania.Biology.Entities\Insania.Biology.Entities.csproj", "{A7434BB7-6DC3-479D-A39E-4D1203254211}"
 EndProject
@@ -18,6 +18,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insania.Biology.Messages", "Insania.Biology.Messages\Insania.Biology.Messages.csproj", "{77710891-071E-45E4-81E1-2BF1B65455E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insania.Biology.Models", "Insania.Biology.Models\Insania.Biology.Models.csproj", "{06BD27D0-4FD9-426A-83F6-DAD06AC3A0E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insania.Biology.Initializer", "Insania.Biology.Initializer\Insania.Biology.Initializer.csproj", "{6C3F5B58-5057-42B1-A876-8A4C6F5FCBAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insania.Biology.Api", "Insania.Biology.Api\Insania.Biology.Api.csproj", "{67957243-769F-432F-ADF6-859B267E54AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insania.Biology.Middleware", "Insania.Biology.Middleware\Insania.Biology.Middleware.csproj", "{11E219E2-360A-4044-A31A-D18376CAF894}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,18 @@ Global
 		{06BD27D0-4FD9-426A-83F6-DAD06AC3A0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06BD27D0-4FD9-426A-83F6-DAD06AC3A0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06BD27D0-4FD9-426A-83F6-DAD06AC3A0E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C3F5B58-5057-42B1-A876-8A4C6F5FCBAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C3F5B58-5057-42B1-A876-8A4C6F5FCBAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C3F5B58-5057-42B1-A876-8A4C6F5FCBAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C3F5B58-5057-42B1-A876-8A4C6F5FCBAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67957243-769F-432F-ADF6-859B267E54AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67957243-769F-432F-ADF6-859B267E54AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67957243-769F-432F-ADF6-859B267E54AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67957243-769F-432F-ADF6-859B267E54AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11E219E2-360A-4044-A31A-D18376CAF894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11E219E2-360A-4044-A31A-D18376CAF894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11E219E2-360A-4044-A31A-D18376CAF894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11E219E2-360A-4044-A31A-D18376CAF894}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,7 @@
 
 using Insania.Biology.Contracts.DataAccess;
 using Insania.Biology.Entities;
+using Insania.Biology.Messages;
 using Insania.Biology.Tests.Base;
 
 namespace Insania.Biology.Tests.DataAccess;
@@ -60,6 +61,40 @@ public class NationsDAOTests : BaseTest
         {
             //Проброс исключения
             throw;
+        }
+    }
+
+    /// <summary>
+    /// Тест метода получения списка наций
+    /// </summary>
+    /// <param cref="long?" name="raceId">Идентификатор расы</param>
+    [TestCase(null)]
+    [TestCase(-1)]
+    [TestCase(1)]
+    public async Task GetListTest(long? raceId)
+    {
+        try
+        {
+            //Получение результата
+            List<Nation>? result = await NationsDAO.GetList(raceId);
+
+            //Проверка результата
+            Assert.That(result, Is.Not.Null);
+            switch (raceId)
+            {
+                case -1: Assert.That(result, Is.Empty); break;
+                case 1: Assert.That(result, Is.Not.Empty); break;
+                default: throw new Exception(ErrorMessages.NotFoundTestCase);
+            }
+        }
+        catch (Exception ex)
+        {
+            //Проверка исключения
+            switch (raceId)
+            {
+                case null: Assert.That(ex.Message, Is.EqualTo(ErrorMessages.EmptyRace)); break;
+                default: throw;
+            }
         }
     }
     #endregion

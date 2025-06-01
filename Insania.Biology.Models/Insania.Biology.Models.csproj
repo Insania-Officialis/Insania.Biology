@@ -6,4 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Insania.Biology.Entities\Insania.Biology.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>I:\Nuget\automapper\14.0.0\lib\net8.0\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Insania.Shared.Models">
+      <HintPath>I:\Nuget\insania.shared.models\1.0.2\lib\net9.0\Insania.Shared.Models.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -55,5 +55,37 @@ public class RacesDAO(ILogger<RacesDAO> logger, BiologyContext context) : IRaces
             throw;
         }
     }
+
+    /// <summary>
+    /// Метод получения расы
+    /// </summary>
+    /// <param cref="long?" name="raceId">Идентификатор расы</param>
+    /// <returns cref="Race?">Раса</returns>
+    /// <exception cref="Exception">Исключение</exception>
+    public async Task<Race?> GetItem(long? raceId)
+    {
+        try
+        {
+            //Логгирование
+            _logger.LogInformation(InformationMessages.EnteredCheckDeletedRaceMethod);
+
+            //Проверки
+            if (raceId == null) throw new Exception(ErrorMessages.EmptyRace);
+
+            //Получение данных из бд
+            Race? data = await _context.Races.Where(x => x.Id == raceId).FirstOrDefaultAsync();
+
+            //Возврат результата
+            return data;
+        }
+        catch (Exception ex)
+        {
+            //Логгирование
+            _logger.LogError("{text}: {error}", ErrorMessages.Error, ex.Message);
+
+            //Проброс исключения
+            throw;
+        }
+    }
     #endregion
 }
