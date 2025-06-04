@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
 
 #Проброс порта
-EXPOSE 8080
+EXPOSE 8081
 
 #Использование образа sdk 9 dotnet
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
