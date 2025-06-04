@@ -73,19 +73,19 @@ services
 //Внедрение зависимостей сервисов
 services.AddSingleton(_ => configuration); //конфигурация
 services.AddScoped<ITransliterationSL, TransliterationSL>(); //сервис транслитерации
-services.AddBiologyBL(); //сервисы работы с бизнес-логикой в зоне пользователей
+services.AddBiologyBL(); //сервисы работы с бизнес-логикой в зоне биологии
 
 //Добавление контекстов бд в коллекцию сервисов
 services.AddDbContext<BiologyContext>(options =>
 {
     string connectionString = configuration.GetConnectionString("Biology") ?? throw new Exception(ErrorMessages.EmptyConnectionString);
     options.UseNpgsql(connectionString);
-}); //бд пользователей
+}); //бд биологии
 services.AddDbContext<LogsApiBiologyContext>(options =>
 {
     string connectionString = configuration.GetConnectionString("LogsApiBiology") ?? throw new Exception(ErrorMessages.EmptyConnectionString);
     options.UseNpgsql(connectionString);
-}); //бд логов api в зоне пользователей
+}); //бд логов api в зоне биологии
 
 //Установка игнорирования типов даты и времени
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
