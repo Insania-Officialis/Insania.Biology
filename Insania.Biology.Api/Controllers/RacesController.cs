@@ -29,7 +29,7 @@ public class RacesController(ILogger<RacesController> logger, IRacesBL racesServ
 
     #region Методы
     /// <summary>
-    /// Метод получения списка наций
+    /// Метод получения списка рас
     /// </summary>
     /// <returns cref="OkResult">Список рас</returns>
     /// <returns cref="BadRequestResult">Ошибка</returns>
