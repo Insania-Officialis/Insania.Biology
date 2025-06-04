@@ -9,14 +9,14 @@ using Insania.Biology.Tests.Base;
 namespace Insania.Biology.Tests.DataAccess;
 
 /// <summary>
-/// Тесты сервиса инициализации данных в бд пользователей
+/// Тесты сервиса инициализации данных в бд биологии
 /// </summary>
 [TestFixture]
 public class InitializationDAOTests : BaseTest
 {
     #region Поля
     /// <summary>
-    /// Сервис инициализации данных в бд пользователей
+    /// Сервис инициализации данных в бд биологии
     /// </summary>
     private IInitializationDAO InitializationDAO { get; set; }
 

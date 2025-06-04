@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 
 using Insania.Shared.Contracts.Services;
+using Insania.Shared.Middleware;
 using Insania.Shared.Services;
 
 using Insania.Biology.BusinessLogic;
