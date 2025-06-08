@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using Microsoft.AspNetCore.Authorization;
 using Insania.Shared.Models.Responses.Base;
 
 using Insania.Biology.Contracts.BusinessLogic;
@@ -32,20 +31,20 @@ public class NationsController(ILogger<NationsController> logger, INationsBL nat
     /// <summary>
     /// Метод получения списка наций
     /// </summary>
-    /// <param cref="long" name="raceId">Идентификатор расы</param>
+    /// <param cref="long" name="race_id">Идентификатор расы</param>
     /// <returns cref="OkResult">Список наций</returns>
     /// <returns cref="BadRequestResult">Ошибка</returns>
     [HttpGet]
     [Route("list")]
-    public async Task<IActionResult> GetList([FromQuery] long? raceId)
+    public async Task<IActionResult> GetList([FromQuery] long? race_id)
     {
         try
         {
             //Проверки
-            if (raceId == null) throw new Exception(ErrorMessages.EmptyRace);
+            if (race_id == null) throw new Exception(ErrorMessages.EmptyRace);
 
             //Получение результата проверки логина
-            BaseResponse? result = await _nationsService.GetList(raceId);
+            BaseResponse? result = await _nationsService.GetList(race_id);
 
             //Возврат ответа
             return Ok(result);
