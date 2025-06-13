@@ -1,9 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using Insania.Biology.Contracts.BusinessLogic;
-using Insania.Biology.Messages;
-using Insania.Biology.Tests.Base;
 using Insania.Shared.Models.Responses.Base;
+
+using Insania.Biology.Contracts.BusinessLogic;
+using Insania.Biology.Tests.Base;
+
+using ErrorMessagesShared = Insania.Shared.Messages.ErrorMessages;
+
+using ErrorMessagesBiology = Insania.Biology.Messages.ErrorMessages;
 
 namespace Insania.Biology.Tests.BusinessLogic;
 
@@ -59,15 +63,15 @@ public class NationsBLTests : BaseTest
 
             //Проверка результата
             Assert.That(result, Is.Not.Null);
-            Assert.Multiple(() =>
+            using (Assert.EnterMultipleScope())
             {
                 Assert.That(result.Success, Is.True);
                 Assert.That(result.Items, Is.Not.Null);
-            });
+            }
             switch (raceId)
             {
                 case 1: Assert.That(result.Items, Is.Not.Empty); break;
-                default: throw new Exception(ErrorMessages.NotFoundTestCase);
+                default: throw new Exception(ErrorMessagesShared.NotFoundTestCase);
             }
         }
         catch (Exception ex)
@@ -75,9 +79,9 @@ public class NationsBLTests : BaseTest
             //Проверка исключения
             switch (raceId)
             {
-                case null: Assert.That(ex.Message, Is.EqualTo(ErrorMessages.EmptyRace)); break;
-                case -1: Assert.That(ex.Message, Is.EqualTo(ErrorMessages.NotFoundRace)); break;
-                case 2: Assert.That(ex.Message, Is.EqualTo(ErrorMessages.DeletedRace)); break;
+                case null: Assert.That(ex.Message, Is.EqualTo(ErrorMessagesBiology.EmptyRace)); break;
+                case -1: Assert.That(ex.Message, Is.EqualTo(ErrorMessagesBiology.NotFoundRace)); break;
+                case 2: Assert.That(ex.Message, Is.EqualTo(ErrorMessagesBiology.DeletedRace)); break;
                 default: throw;
             }
         }

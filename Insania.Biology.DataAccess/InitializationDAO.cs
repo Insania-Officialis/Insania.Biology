@@ -13,8 +13,13 @@ using Insania.Shared.Contracts.Services;
 
 using Insania.Biology.Database.Contexts;
 using Insania.Biology.Entities;
-using Insania.Biology.Messages;
 using Insania.Biology.Models.Settings;
+
+using ErrorMessagesShared = Insania.Shared.Messages.ErrorMessages;
+using InformationMessages = Insania.Shared.Messages.InformationMessages;
+
+using ErrorMessagesBiology = Insania.Biology.Messages.ErrorMessages;
+
 
 namespace Insania.Biology.DataAccess;
 
@@ -87,9 +92,9 @@ public class InitializationDAO(ILogger<InitializationDAO> logger, BiologyContext
                 if (_settings.Value.Databases?.Biology == true)
                 {
                     //Формирование параметров
-                    string connectionServer = _configuration.GetConnectionString("BiologySever") ?? throw new Exception(ErrorMessages.EmptyConnectionString);
+                    string connectionServer = _configuration.GetConnectionString("BiologySever") ?? throw new Exception(ErrorMessagesShared.EmptyConnectionString);
                     string patternDatabases = @"^databases_biology_\d+\.sql$";
-                    string connectionDatabase = _configuration.GetConnectionString("BiologyEmpty") ?? throw new Exception(ErrorMessages.EmptyConnectionString);
+                    string connectionDatabase = _configuration.GetConnectionString("BiologyEmpty") ?? throw new Exception(ErrorMessagesShared.EmptyConnectionString);
                     string patternSchemes = @"^schemes_biology_\d+\.sql$";
 
                     //Создание базы данных
@@ -98,9 +103,9 @@ public class InitializationDAO(ILogger<InitializationDAO> logger, BiologyContext
                 if (_settings.Value.Databases?.LogsApiBiology == true)
                 {
                     //Формирование параметров
-                    string connectionServer = _configuration.GetConnectionString("LogsApiBiologyServer") ?? throw new Exception(ErrorMessages.EmptyConnectionString);
+                    string connectionServer = _configuration.GetConnectionString("LogsApiBiologyServer") ?? throw new Exception(ErrorMessagesShared.EmptyConnectionString);
                     string patternDatabases = @"^databases_logs_api_biology_\d+\.sql$";
-                    string connectionDatabase = _configuration.GetConnectionString("LogsApiBiologyEmpty") ?? throw new Exception(ErrorMessages.EmptyConnectionString);
+                    string connectionDatabase = _configuration.GetConnectionString("LogsApiBiologyEmpty") ?? throw new Exception(ErrorMessagesShared.EmptyConnectionString);
                     string patternSchemes = @"^schemes_logs_api_biology_\d+\.sql$";
 
                     //Создание базы данных
@@ -116,7 +121,7 @@ public class InitializationDAO(ILogger<InitializationDAO> logger, BiologyContext
             if (_logsApiBiologyContext.Database.IsRelational()) await _logsApiBiologyContext.Database.MigrateAsync();
 
             //Проверки
-            if (string.IsNullOrWhiteSpace(_settings.Value.ScriptsPath)) throw new Exception(ErrorMessages.EmptyScriptsPath);
+            if (string.IsNullOrWhiteSpace(_settings.Value.ScriptsPath)) throw new Exception(ErrorMessagesShared.EmptyScriptsPath);
 
             //Инициализация данных в зависимости от параметров
             if (_settings.Value.Tables?.Races == true)
@@ -246,7 +251,7 @@ public class InitializationDAO(ILogger<InitializationDAO> logger, BiologyContext
                         if (!_biologyContext.Nations.Any(x => x.Id == long.Parse(key[0])))
                         {
                             //Получение сущностей
-                            Race race = await _biologyContext.Races.FirstOrDefaultAsync(x => x.Id == long.Parse(key[4])) ?? throw new Exception(ErrorMessages.NotFoundRace);
+                            Race race = await _biologyContext.Races.FirstOrDefaultAsync(x => x.Id == long.Parse(key[4])) ?? throw new Exception(ErrorMessagesBiology.NotFoundRace);
 
                             //Создание сущности
                             DateTime? dateDeleted = null;
@@ -277,7 +282,7 @@ public class InitializationDAO(ILogger<InitializationDAO> logger, BiologyContext
         catch (Exception ex)
         {
             //Логгирование
-            _logger.LogError("{text}: {error}", ErrorMessages.Error, ex.Message);
+            _logger.LogError("{text}: {error}", ErrorMessagesShared.Error, ex.Message);
 
             //Проброс исключения
             throw;
@@ -342,7 +347,7 @@ public class InitializationDAO(ILogger<InitializationDAO> logger, BiologyContext
         catch (Exception ex)
         {
             //Логгирование
-            _logger.LogError("{text} {params} из-за ошибки {ex}", ErrorMessages.NotExecutedScript, filePath, ex);
+            _logger.LogError("{text} {params} из-за ошибки {ex}", ErrorMessagesShared.NotExecutedScript, filePath, ex);
         }
     }
     #endregion

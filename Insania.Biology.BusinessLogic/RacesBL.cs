@@ -2,11 +2,14 @@
 
 using AutoMapper;
 
+using Insania.Shared.Models.Responses.Base;
+
 using Insania.Biology.Contracts.BusinessLogic;
 using Insania.Biology.Contracts.DataAccess;
 using Insania.Biology.Entities;
 using Insania.Biology.Messages;
-using Insania.Shared.Models.Responses.Base;
+
+using ErrorMessages = Insania.Shared.Messages.ErrorMessages;
 
 namespace Insania.Biology.BusinessLogic;
 

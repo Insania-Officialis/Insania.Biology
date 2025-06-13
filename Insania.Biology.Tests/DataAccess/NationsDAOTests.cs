@@ -2,8 +2,11 @@
 
 using Insania.Biology.Contracts.DataAccess;
 using Insania.Biology.Entities;
-using Insania.Biology.Messages;
 using Insania.Biology.Tests.Base;
+
+using ErrorMessagesShared = Insania.Shared.Messages.ErrorMessages;
+
+using ErrorMessagesBiology = Insania.Biology.Messages.ErrorMessages;
 
 namespace Insania.Biology.Tests.DataAccess;
 
@@ -84,7 +87,7 @@ public class NationsDAOTests : BaseTest
             {
                 case -1: Assert.That(result, Is.Empty); break;
                 case 1: Assert.That(result, Is.Not.Empty); break;
-                default: throw new Exception(ErrorMessages.NotFoundTestCase);
+                default: throw new Exception(ErrorMessagesShared.NotFoundTestCase);
             }
         }
         catch (Exception ex)
@@ -92,7 +95,7 @@ public class NationsDAOTests : BaseTest
             //Проверка исключения
             switch (raceId)
             {
-                case null: Assert.That(ex.Message, Is.EqualTo(ErrorMessages.EmptyRace)); break;
+                case null: Assert.That(ex.Message, Is.EqualTo(ErrorMessagesBiology.EmptyRace)); break;
                 default: throw;
             }
         }

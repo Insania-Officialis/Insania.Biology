@@ -17,9 +17,10 @@ using Insania.Shared.Services;
 
 using Insania.Biology.BusinessLogic;
 using Insania.Biology.Database.Contexts;
-using Insania.Biology.Messages;
 using Insania.Biology.Middleware;
 using Insania.Biology.Models.Mapper;
+
+using ErrorMessages = Insania.Shared.Messages.ErrorMessages;
 
 //Создания экземпляра постройки веб-приложения
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -119,7 +120,7 @@ services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Insania API", Version = "v1" });
 
-    var filePath = Path.Combine(AppContext.BaseDirectory, "Insania.Biology.Api.xml");
+    var filePath = Path.Combine(AppContext.BaseDirectory, "Insania.Biology.ApiRead.xml");
     options.IncludeXmlComments(filePath);
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

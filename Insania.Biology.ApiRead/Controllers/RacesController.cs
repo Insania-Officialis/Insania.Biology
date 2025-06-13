@@ -3,9 +3,10 @@
 using Insania.Shared.Models.Responses.Base;
 
 using Insania.Biology.Contracts.BusinessLogic;
-using Insania.Biology.Messages;
 
-namespace Insania.Biology.Api.Controllers;
+using ErrorMessages = Insania.Shared.Messages.ErrorMessages;
+
+namespace Insania.Biology.ApiRead.Controllers;
 
 /// <summary>
 /// Контроллер работы с расами

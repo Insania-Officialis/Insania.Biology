@@ -2,11 +2,16 @@
 
 using AutoMapper;
 
+using Insania.Shared.Models.Responses.Base;
+
 using Insania.Biology.Contracts.BusinessLogic;
 using Insania.Biology.Contracts.DataAccess;
 using Insania.Biology.Entities;
 using Insania.Biology.Messages;
-using Insania.Shared.Models.Responses.Base;
+
+using ErrorMessagesShared = Insania.Shared.Messages.ErrorMessages;
+
+using ErrorMessagesBiology = Insania.Biology.Messages.ErrorMessages;
 
 namespace Insania.Biology.BusinessLogic;
 
@@ -56,9 +61,9 @@ public class NationsBL(ILogger<NationsBL> logger, IMapper mapper, INationsDAO na
             _logger.LogInformation(InformationMessages.EnteredGetListNationsMethod);
 
             //Проверки
-            if (raceId == null) throw new Exception(ErrorMessages.EmptyRace);
-            Race? race = await _racesDAO.GetItem(raceId) ?? throw new Exception(ErrorMessages.NotFoundRace);
-            if (race.DateDeleted != null) throw new Exception(ErrorMessages.DeletedRace);
+            if (raceId == null) throw new Exception(ErrorMessagesBiology.EmptyRace);
+            Race? race = await _racesDAO.GetItem(raceId) ?? throw new Exception(ErrorMessagesBiology.NotFoundRace);
+            if (race.DateDeleted != null) throw new Exception(ErrorMessagesBiology.DeletedRace);
 
 
             //Получение данных
@@ -75,7 +80,7 @@ public class NationsBL(ILogger<NationsBL> logger, IMapper mapper, INationsDAO na
         catch (Exception ex)
         {
             //Логгирование
-            _logger.LogError("{text}: {error}", ErrorMessages.Error, ex.Message);
+            _logger.LogError("{text}: {error}", ErrorMessagesShared.Error, ex.Message);
 
             //Проброс исключения
             throw;

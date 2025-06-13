@@ -12,8 +12,9 @@ using Insania.Shared.Services;
 
 using Insania.Biology.DataAccess;
 using Insania.Biology.Database.Contexts;
-using Insania.Biology.Messages;
 using Insania.Biology.Models.Settings;
+
+using ErrorMessages = Insania.Shared.Messages.ErrorMessages;
 
 //Запуск хоста
 CreateHostBuilder(args).Build().Run();

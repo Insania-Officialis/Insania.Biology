@@ -1,18 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>5dcf6588-8368-4e21-8822-2c1a410469c4</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Insania.Shared.Contracts" Version="1.0.3" />
     <PackageReference Include="Insania.Shared.Middleware" Version="1.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
+    <PackageReference Include="Insania.Shared.Services" Version="1.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
     <PackageReference Include="Microsoft.OpenApi" Version="1.6.24" />
     <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
@@ -27,15 +32,6 @@
     <ProjectReference Include="..\Insania.Biology.Messages\Insania.Biology.Messages.csproj" />
     <ProjectReference Include="..\Insania.Biology.Middleware\Insania.Biology.Middleware.csproj" />
     <ProjectReference Include="..\Insania.Biology.Models\Insania.Biology.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Insania.Shared.Contracts">
-      <HintPath>I:\Nuget\insania.shared.contracts\1.0.2\lib\net9.0\Insania.Shared.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="Insania.Shared.Services">
-      <HintPath>I:\Nuget\insania.shared.services\1.0.2\lib\net9.0\Insania.Shared.Services.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

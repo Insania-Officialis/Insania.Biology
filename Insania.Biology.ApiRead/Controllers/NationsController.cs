@@ -3,9 +3,12 @@
 using Insania.Shared.Models.Responses.Base;
 
 using Insania.Biology.Contracts.BusinessLogic;
-using Insania.Biology.Messages;
 
-namespace Insania.Biology.Api.Controllers;
+using ErrorMessagesShared = Insania.Shared.Messages.ErrorMessages;
+
+using ErrorMessagesBiology = Insania.Biology.Messages.ErrorMessages;
+
+namespace Insania.Biology.ApiRead.Controllers;
 
 /// <summary>
 /// Контроллер работы с нациями
@@ -41,7 +44,7 @@ public class NationsController(ILogger<NationsController> logger, INationsBL nat
         try
         {
             //Проверки
-            if (race_id == null) throw new Exception(ErrorMessages.EmptyRace);
+            if (race_id == null) throw new Exception(ErrorMessagesBiology.EmptyRace);
 
             //Получение результата проверки логина
             BaseResponse? result = await _nationsService.GetList(race_id);
@@ -52,7 +55,7 @@ public class NationsController(ILogger<NationsController> logger, INationsBL nat
         catch (Exception ex)
         {
             //Логгирование
-            _logger.LogError("{text} {ex}", ErrorMessages.Error, ex);
+            _logger.LogError("{text} {ex}", ErrorMessagesShared.Error, ex);
 
             //Возврат ошибки
             return BadRequest(new BaseResponseError(ex.Message));

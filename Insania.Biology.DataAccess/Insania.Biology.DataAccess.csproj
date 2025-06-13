@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Insania.Shared.Messages" Version="1.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Insania.Biology.Contracts\Insania.Biology.Contracts.csproj" />
     <ProjectReference Include="..\Insania.Biology.Database\Insania.Biology.Database.csproj" />
     <ProjectReference Include="..\Insania.Biology.Entities\Insania.Biology.Entities.csproj" />

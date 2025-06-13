@@ -6,6 +6,10 @@ using Insania.Biology.Database.Contexts;
 using Insania.Biology.Entities;
 using Insania.Biology.Messages;
 
+using ErrorMessagesShared = Insania.Shared.Messages.ErrorMessages;
+
+using ErrorMessagesBiology = Insania.Biology.Messages.ErrorMessages;
+
 namespace Insania.Biology.DataAccess;
 
 /// <summary>
@@ -49,7 +53,7 @@ public class RacesDAO(ILogger<RacesDAO> logger, BiologyContext context) : IRaces
         catch (Exception ex)
         {
             //Логгирование
-            _logger.LogError("{text}: {error}", ErrorMessages.Error, ex.Message);
+            _logger.LogError("{text}: {error}", ErrorMessagesShared.Error, ex.Message);
 
             //Проброс исключения
             throw;
@@ -70,7 +74,7 @@ public class RacesDAO(ILogger<RacesDAO> logger, BiologyContext context) : IRaces
             _logger.LogInformation(InformationMessages.EnteredCheckDeletedRaceMethod);
 
             //Проверки
-            if (raceId == null) throw new Exception(ErrorMessages.EmptyRace);
+            if (raceId == null) throw new Exception(ErrorMessagesBiology.EmptyRace);
 
             //Получение данных из бд
             Race? data = await _context.Races.Where(x => x.Id == raceId).FirstOrDefaultAsync();
@@ -81,7 +85,7 @@ public class RacesDAO(ILogger<RacesDAO> logger, BiologyContext context) : IRaces
         catch (Exception ex)
         {
             //Логгирование
-            _logger.LogError("{text}: {error}", ErrorMessages.Error, ex.Message);
+            _logger.LogError("{text}: {error}", ErrorMessagesShared.Error, ex.Message);
 
             //Проброс исключения
             throw;
