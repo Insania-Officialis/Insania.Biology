@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Insania.Biology.Database.Migrations.LogsApiBiology
 {
     [DbContext(typeof(LogsApiBiologyContext))]
-    [Migration("20250601143849_Init")]
+    [Migration("20250628132302_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -21,7 +21,7 @@ namespace Insania.Biology.Database.Migrations.LogsApiBiology
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("insania_logs_api_biology")
-                .HasAnnotation("ProductVersion", "9.0.5")
+                .HasAnnotation("ProductVersion", "9.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);

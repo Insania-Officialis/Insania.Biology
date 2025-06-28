@@ -10,7 +10,7 @@ namespace Insania.Biology.Entities;
 /// <summary>
 /// Модель сущности расы
 /// </summary>
-[Table("d_races")]
+[Table("c_races")]
 [Comment("Расы")]
 public class Race : Compendium
 {

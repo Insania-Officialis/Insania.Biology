@@ -16,7 +16,7 @@ namespace Insania.Biology.Database.Migrations
                 name: "insania_biology");
 
             migrationBuilder.CreateTable(
-                name: "d_races",
+                name: "c_races",
                 schema: "insania_biology",
                 columns: table => new
                 {
@@ -34,13 +34,13 @@ namespace Insania.Biology.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_d_races", x => x.id);
-                    table.UniqueConstraint("AK_d_races_alias", x => x.alias);
+                    table.PrimaryKey("PK_c_races", x => x.id);
+                    table.UniqueConstraint("AK_c_races_alias", x => x.alias);
                 },
                 comment: "Расы");
 
             migrationBuilder.CreateTable(
-                name: "d_nations",
+                name: "c_nations",
                 schema: "insania_biology",
                 columns: table => new
                 {
@@ -59,22 +59,22 @@ namespace Insania.Biology.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_d_nations", x => x.id);
-                    table.UniqueConstraint("AK_d_nations_alias", x => x.alias);
+                    table.PrimaryKey("PK_c_nations", x => x.id);
+                    table.UniqueConstraint("AK_c_nations_alias", x => x.alias);
                     table.ForeignKey(
-                        name: "FK_d_nations_d_races_race_id",
+                        name: "FK_c_nations_c_races_race_id",
                         column: x => x.race_id,
                         principalSchema: "insania_biology",
-                        principalTable: "d_races",
+                        principalTable: "c_races",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 },
                 comment: "Нации");
 
             migrationBuilder.CreateIndex(
-                name: "IX_d_nations_race_id",
+                name: "IX_c_nations_race_id",
                 schema: "insania_biology",
-                table: "d_nations",
+                table: "c_nations",
                 column: "race_id");
         }
 
@@ -82,11 +82,11 @@ namespace Insania.Biology.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "d_nations",
+                name: "c_nations",
                 schema: "insania_biology");
 
             migrationBuilder.DropTable(
-                name: "d_races",
+                name: "c_races",
                 schema: "insania_biology");
         }
     }

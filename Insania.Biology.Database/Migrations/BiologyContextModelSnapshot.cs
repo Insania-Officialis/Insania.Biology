@@ -18,7 +18,7 @@ namespace Insania.Biology.Database.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("insania_biology")
-                .HasAnnotation("ProductVersion", "9.0.5")
+                .HasAnnotation("ProductVersion", "9.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -95,7 +95,7 @@ namespace Insania.Biology.Database.Migrations
 
                     b.HasIndex("RaceId");
 
-                    b.ToTable("d_nations", "insania_biology", t =>
+                    b.ToTable("c_nations", "insania_biology", t =>
                         {
                             t.HasComment("Нации");
                         });
@@ -165,7 +165,7 @@ namespace Insania.Biology.Database.Migrations
 
                     b.HasAlternateKey("Alias");
 
-                    b.ToTable("d_races", "insania_biology", t =>
+                    b.ToTable("c_races", "insania_biology", t =>
                         {
                             t.HasComment("Расы");
                         });
