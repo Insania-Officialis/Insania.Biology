@@ -66,7 +66,7 @@ public abstract class BaseTest
         services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(Log.Logger, dispose: true));
 
         //Добавление параметров преобразования моделей
-        services.AddAutoMapper(typeof(BiologyMappingProfile));
+        services.AddAutoMapper(cfg => { cfg.AddProfile<BiologyMappingProfile>(); });
 
         //Добавление параметров инициализации данных
         IConfigurationSection? initializationDataSettings = configuration.GetSection("InitializationDataSettings");
