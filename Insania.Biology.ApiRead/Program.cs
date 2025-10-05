@@ -13,14 +13,15 @@ using Serilog;
 
 using Insania.Shared.Contracts.Services;
 using Insania.Shared.Middleware;
+using Insania.Shared.Messages;
 using Insania.Shared.Services;
 
 using Insania.Biology.BusinessLogic;
+using Insania.Biology.Contracts.Services;
 using Insania.Biology.Database.Contexts;
 using Insania.Biology.Middleware;
 using Insania.Biology.Models.Mapper;
-
-using ErrorMessages = Insania.Shared.Messages.ErrorMessages;
+using Insania.Biology.Services;
 
 //Создания экземпляра постройки веб-приложения
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -81,6 +82,9 @@ services
 //Внедрение зависимостей сервисов
 services.AddSingleton(_ => configuration); //конфигурация
 services.AddScoped<ITransliterationSL, TransliterationSL>(); //сервис транслитерации
+services.AddSingleton<LoggingSL>(); //сервис логгирование в бд
+services.AddSingleton<ILoggingSL>(provider => provider.GetRequiredService<LoggingSL>()); //подключение сервиса для использования другими сервисами
+services.AddHostedService(provider => provider.GetRequiredService<LoggingSL>()); //подключение сервиса для работы фоном
 services.AddBiologyBL(); //сервисы работы с бизнес-логикой в зоне биологии
 
 //Добавление контекстов бд в коллекцию сервисов

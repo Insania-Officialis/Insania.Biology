@@ -18,8 +18,8 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.4" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.6" />
     
     <PackageReference Include="Insania.Shared.Contracts" Version="1.0.8" />
     <PackageReference Include="Insania.Shared.Middleware" Version="1.1.4" />
@@ -33,6 +33,7 @@
     <ProjectReference Include="..\Insania.Biology.Messages\Insania.Biology.Messages.csproj" />
     <ProjectReference Include="..\Insania.Biology.Middleware\Insania.Biology.Middleware.csproj" />
     <ProjectReference Include="..\Insania.Biology.Models\Insania.Biology.Models.csproj" />
+    <ProjectReference Include="..\Insania.Biology.Services\Insania.Biology.Services.csproj" />
   </ItemGroup>
 
 </Project>
