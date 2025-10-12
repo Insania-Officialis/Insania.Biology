@@ -20,7 +20,7 @@ jobs:
     - name: Обновление кода
       run: |
         cd /app
-        cd Insania.Files
+        cd Insania.Biology
         git pull
       shell: bash
 
@@ -28,12 +28,12 @@ jobs:
     - name: Сборка и запуск unit-тестов
       run: |
         cd /app
-        docker-compose build insania_files_unit_tests
-        if docker-compose run --rm insania_files_unit_tests; then
+        docker-compose build insania_biology_unit_tests
+        if docker-compose run --rm insania_biology_unit_tests; then
           echo "✅ Успешное завершение unit-тестов"
         else
           echo "❌ Не пройдены unit-тесты"
-          docker-compose logs insania_files_unit_tests --tail=50
+          docker-compose logs insania_biology_unit_tests --tail=50
           exit 1
         fi
       shell: bash
@@ -48,7 +48,7 @@ jobs:
     - name: Обновление кода
       run: |
         cd C:\Insania
-        cd Insania.Files
+        cd Insania.Biology
         git pull
       shell: powershell
 
@@ -56,9 +56,9 @@ jobs:
     - name: Сборка и запуск unit-тестов
       run: |
         cd C:\Insania
-        docker-compose build insania_files_unit_tests
+        docker-compose build insania_biology_unit_tests
         try {
-          docker-compose run --rm insania_files_unit_tests
+          docker-compose run --rm insania_biology_unit_tests
           if ($LASTEXITCODE -eq 0) {
             Write-Host "✅ Успешное завершение unit-тестов"
           } else {
@@ -66,7 +66,7 @@ jobs:
           }
         } catch {
           Write-Host "❌ Не пройдены unit-тесты"
-          docker-compose logs insania_files_unit_tests --tail=50
+          docker-compose logs insania_biology_unit_tests --tail=50
           exit 1
         }
       shell: powershell
