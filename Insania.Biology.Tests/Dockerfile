@@ -1,0 +1,23 @@
+﻿#Использование образа sdk 9 dotnet
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+
+#Создание переменной конфигурации сборки
+ARG BUILD_CONFIGURATION=Release
+
+#Задание рабочего каталога
+WORKDIR /src
+
+#Копирование файлов в контейнер
+COPY [".", ""]
+
+#Восстановление проекта тестов
+RUN dotnet restore "./Insania.Biology.Tests/Insania.Biology.Tests.csproj"
+
+#Задание рабочего каталога
+WORKDIR /src/Insania.Biology.Tests
+
+#Сборка проекта тестов
+RUN dotnet build "./Insania.Biology.Tests.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+# Запуск тестов
+CMD ["dotnet", "test", "--logger:console;verbosity=normal"]
