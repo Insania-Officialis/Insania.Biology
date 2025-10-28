@@ -18,5 +18,6 @@ public static class Extension
         services
             .AddScoped<IRacesDAO, RacesDAO>() //сервис работы с данными рас
             .AddScoped<INationsDAO, NationsDAO>() //сервис работы с данными наций
+            .AddScoped<IParametersDAO, ParametersDAO>() //сервис работы с данными параметров
         ;
 }

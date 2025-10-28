@@ -43,6 +43,11 @@ public class InitializationDataSettingsIncludeTables
     /// Нации
     /// </summary>
     public bool? Nations { get; set; }
+
+    /// <summary>
+    /// Параметры
+    /// </summary>
+    public bool? Parameters { get; set; }
 }
 
 /// <summary>

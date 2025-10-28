@@ -38,7 +38,8 @@ public abstract class BaseTest
            {"InitializationDataSettings:ScriptsPath", DetermineScriptsPath()},
            {"InitializationDataSettings:InitStructure", "false"},
            {"InitializationDataSettings:Tables:Races", "true"},
-           {"InitializationDataSettings:Tables:Nations", "true"}
+           {"InitializationDataSettings:Tables:Nations", "true"},
+           {"InitializationDataSettings:Tables:Parameters", "true"},
         };
 
         //Создание экземпляра конфигурации в памяти

@@ -7,5 +7,6 @@ public static class InformationMessages
 {
     public const string EnteredCheckDeletedRaceMethod = "Вошли в метод проверки удаления расы";
     public const string EnteredGetListNationsMethod = "Вошли в метод получения списка наций";
+    public const string EnteredGetListParametersMethod = "Вошли в метод получения списка параметров";
     public const string EnteredGetListRacesMethod = "Вошли в метод получения списка рас";
 }

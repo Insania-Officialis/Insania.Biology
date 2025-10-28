@@ -20,7 +20,6 @@ using InformationMessages = Insania.Shared.Messages.InformationMessages;
 
 using ErrorMessagesBiology = Insania.Biology.Messages.ErrorMessages;
 
-
 namespace Insania.Biology.DataAccess;
 
 /// <summary>
@@ -35,6 +34,9 @@ namespace Insania.Biology.DataAccess;
 public class InitializationDAO(ILogger<InitializationDAO> logger, BiologyContext biologyContext, LogsApiBiologyContext logsApiBiologyContext, IOptions<InitializationDataSettings> settings, ITransliterationSL transliteration, IConfiguration configuration) : IInitializationDAO
 {
     #region Поля
+    /// <summary>
+    /// Пользователь, вносящий изменения
+    /// </summary>
     private readonly string _username = "initializer";
     #endregion
 
@@ -278,6 +280,53 @@ public class InitializationDAO(ILogger<InitializationDAO> logger, BiologyContext
                     throw;
                 }
             }
+            if (_settings.Value.Tables?.Parameters == true)
+            {
+                //Открытие транзакции
+                IDbContextTransaction transaction = _biologyContext.Database.BeginTransaction();
+
+                try
+                {
+                    //Создание коллекции сущностей
+                    List<ParameterBiology> entities =
+                    [
+                        new(_transliteration, 10000, _username, "Удалённый", dateDeleted: DateTime.UtcNow),
+                        new(_transliteration, 1, _username, "Ссылка на файловый сервис", "http://192.168.31.234:7082"),
+                        new(_transliteration, 2, _username, "Метод получения файлов", "/files/by_id"),
+                    ];
+
+                    //Проход по коллекции сущностей
+                    foreach (var entity in entities)
+                    {
+                        //Добавление сущности в бд при её отсутствии
+                        if (!_biologyContext.Parameters.Any(x => x.Id == entity.Id)) await _biologyContext.Parameters.AddAsync(entity);
+                    }
+
+                    //Сохранение изменений в бд
+                    await _biologyContext.SaveChangesAsync();
+
+                    //Создание шаблона файла скриптов
+                    string pattern = @"^t_parameters_\d+.sql";
+
+                    //Проходим по всем скриптам
+                    foreach (var file in Directory.GetFiles(_settings.Value.ScriptsPath!).Where(x => Regex.IsMatch(Path.GetFileName(x), pattern)))
+                    {
+                        //Выполняем скрипт
+                        await ExecuteScript(file, _biologyContext);
+                    }
+
+                    //Фиксация транзакции
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    //Откат транзакции
+                    transaction.Rollback();
+
+                    //Проброс исключения
+                    throw;
+                }
+            }
         }
         catch (Exception ex)
         {
@@ -340,6 +389,34 @@ public class InitializationDAO(ILogger<InitializationDAO> logger, BiologyContext
 
             //Выполнение команды
             await command.ExecuteNonQueryAsync();
+
+            //Логгирование
+            _logger.LogInformation("{text} {params}", InformationMessages.ExecutedScript, filePath);
+        }
+        catch (Exception ex)
+        {
+            //Логгирование
+            _logger.LogError("{text} {params} из-за ошибки {ex}", ErrorMessagesShared.NotExecutedScript, filePath, ex);
+        }
+    }
+
+    /// <summary>
+    /// Метод выполнения скрипта с контекстом
+    /// </summary>
+    /// <param cref="string" name="filePath">Путь к скрипту</param>
+    /// <param cref="DbContext" name="context">Контекст базы данных</param>
+    private async Task ExecuteScript(string filePath, DbContext context)
+    {
+        //Логгирование
+        _logger.LogInformation("{text} {params}", InformationMessages.ExecuteScript, filePath);
+
+        try
+        {
+            //Считывание запроса
+            string sql = File.ReadAllText(filePath);
+
+            //Выполнение sql-команды
+            await context.Database.ExecuteSqlRawAsync(sql);
 
             //Логгирование
             _logger.LogInformation("{text} {params}", InformationMessages.ExecutedScript, filePath);

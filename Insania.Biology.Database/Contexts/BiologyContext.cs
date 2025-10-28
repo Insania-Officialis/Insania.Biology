@@ -38,6 +38,11 @@ public class BiologyContext : DbContext
     /// Нации
     /// </summary>
     public virtual DbSet<Nation> Nations { get; set; }
+
+    /// <summary>
+    /// Параметры
+    /// </summary>
+    public virtual DbSet<ParameterBiology> Parameters { get; set; }
     #endregion
 
     #region Методы
@@ -55,6 +60,9 @@ public class BiologyContext : DbContext
 
         //Создание ограничения уникальности на псевдоним нации
         modelBuilder.Entity<Nation>().HasAlternateKey(x => x.Alias);
+
+        //Ограничение уникальности для параметра
+        modelBuilder.Entity<ParameterBiology>().HasAlternateKey(x => x.Alias);
     }
     #endregion
 }
