@@ -141,7 +141,7 @@ public class RacesBL(ILogger<RacesBL> logger, IMapper mapper, IFilesSL filesSL, 
                                 if (nationFile == null) return null;
 
                                 //Возврат файла с нацией
-                                return new BaseResponseListItem(nation.Id, nation.Description, nationFile.Name);
+                                return new BaseResponseListItem(nation.Id, nation.Name, nation.Description, nationFile.Name);
                             }
                             catch
                             {
