@@ -13,4 +13,12 @@ public interface IParametersDAO
     /// <returns cref="List{ParameterBiology}">Список параметров</returns>
     /// <exception cref="Exception">Исключение</exception>
     Task<List<ParameterBiology>> GetList();
+
+    /// <summary>
+    /// Метод получения параметра по псевдониму
+    /// </summary>
+    /// <param cref="string" name="alias">Псевдоним параметра</param>
+    /// <returns cref="ParameterBiology?">Параметр</returns>
+    /// <exception cref="Exception">Исключение</exception>
+    Task<ParameterBiology?> GetByAlias(string alias);
 }

@@ -45,7 +45,7 @@ public class RacesDAO(ILogger<RacesDAO> logger, BiologyContext context) : IRaces
             _logger.LogInformation(InformationMessages.EnteredGetListRacesMethod);
 
             //Получение данных из бд
-            List<Race> data = await _context.Races.Where(x => x.DateDeleted == null).ToListAsync();
+            List<Race> data = await _context.Races.Include(x => x.Nations).Where(x => x.DateDeleted == null).ToListAsync();
 
             //Возврат результата
             return data;

@@ -3,6 +3,7 @@
 using Insania.Shared.Models.Responses.Base;
 
 using Insania.Biology.Contracts.BusinessLogic;
+using Insania.Biology.Models.Responses.Races;
 
 using ErrorMessages = Insania.Shared.Messages.ErrorMessages;
 
@@ -42,6 +43,33 @@ public class RacesController(ILogger<RacesController> logger, IRacesBL racesServ
         {
             //Получение результата проверки логина
             BaseResponse? result = await _racesService.GetList();
+
+            //Возврат ответа
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            //Логгирование
+            _logger.LogError("{text} {ex}", ErrorMessages.Error, ex);
+
+            //Возврат ошибки
+            return BadRequest(new BaseResponseError(ex.Message));
+        }
+    }
+
+    /// <summary>
+    /// Метод получения списка рас с нациями
+    /// </summary>
+    /// <returns cref="OkResult">Список рас</returns>
+    /// <returns cref="BadRequestResult">Ошибка</returns>
+    [HttpGet]
+    [Route("list_with_nations")]
+    public async Task<IActionResult> GetListWithNations()
+    {
+        try
+        {
+            //Получение результата проверки логина
+            RacesWithNationsResponseList? result = await _racesService.GetListWithNations();
 
             //Возврат ответа
             return Ok(result);

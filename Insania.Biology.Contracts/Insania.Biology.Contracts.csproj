@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Insania.Shared.Models" Version="1.0.4" />
+    <PackageReference Include="Insania.Shared.Models" Version="1.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Insania.Biology.Entities\Insania.Biology.Entities.csproj" />
+    <ProjectReference Include="..\Insania.Biology.Models\Insania.Biology.Models.csproj" />
   </ItemGroup>
 
 </Project>

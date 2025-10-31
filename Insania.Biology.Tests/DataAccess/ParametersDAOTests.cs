@@ -4,6 +4,10 @@ using Insania.Biology.Contracts.DataAccess;
 using Insania.Biology.Entities;
 using Insania.Biology.Tests.Base;
 
+using ErrorMessagesShared = Insania.Shared.Messages.ErrorMessages;
+
+using ErrorMessagesBiology = Insania.Biology.Messages.ErrorMessages;
+
 namespace Insania.Biology.Tests.DataAccess;
 
 /// <summary>
@@ -60,6 +64,39 @@ public class ParametersDAOTests : BaseTest
         {
             //Проброс исключения
             throw;
+        }
+    }
+
+    /// <summary>
+    /// Тест метода получения параметра по псевдониму
+    /// </summary>
+    /// <param cref="string" name="alias">Псевдоним параметра</param>
+    [TestCase("")]
+    [TestCase("incorrect")]
+    [TestCase("Ssylka_na_faiylovyiy_syervis")]
+    public async Task GetByAliasTest(string alias)
+    {
+        try
+        {
+            //Получение результата
+            ParameterBiology? result = await ParametersDAO.GetByAlias(alias);
+
+            //Проверка результата
+            switch (alias)
+            {
+                case "incorrect": Assert.That(result, Is.Null); break;
+                case "Ssylka_na_faiylovyiy_syervis": Assert.That(result, Is.Not.Null); Assert.That(result!.Alias, Is.EqualTo(alias)); break;
+                default: throw new Exception(ErrorMessagesShared.NotFoundTestCase);
+            }
+        }
+        catch (Exception ex)
+        {
+            //Проверка исключения
+            switch (alias)
+            {
+                case "": Assert.That(ex.Message, Is.EqualTo(ErrorMessagesShared.EmptyAlias)); break;
+                default: throw;
+            }
         }
     }
     #endregion

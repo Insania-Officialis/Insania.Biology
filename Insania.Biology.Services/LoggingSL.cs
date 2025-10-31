@@ -184,7 +184,7 @@ public class LoggingSL: ILoggingSL, IHostedService, IDisposable
     /// <returns cref="Task">Задание</returns>
     private async Task SaveBatchAsync(CancellationToken cancellationToken)
     {
-        //Выход при отстутсвии записей
+        //Выход при отсутствии записей
         if (_batch.Count == 0) return;
 
         try

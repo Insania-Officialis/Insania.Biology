@@ -24,7 +24,7 @@
 
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="NUnit" Version="4.4.0" />
-    <PackageReference Include="NUnit.Analyzers" Version="4.10.0">
+    <PackageReference Include="NUnit.Analyzers" Version="4.11.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -35,7 +35,7 @@
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
 
     <PackageReference Include="Insania.Shared.Contracts" Version="1.0.9" />
-    <PackageReference Include="Insania.Shared.Services" Version="1.0.11" />
+    <PackageReference Include="Insania.Shared.Services" Version="1.0.13" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +44,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Insania.Biology.BusinessLogic\Insania.Biology.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Insania.Biology.Services\Insania.Biology.Services.csproj" />
   </ItemGroup>
 
 </Project>

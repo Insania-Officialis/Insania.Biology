@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,10 +11,14 @@ using Insania.Shared.Contracts.Services;
 using Insania.Shared.Services;
 
 using Insania.Biology.BusinessLogic;
+using Insania.Biology.Contracts.Services;
 using Insania.Biology.DataAccess;
 using Insania.Biology.Database.Contexts;
-using Insania.Biology.Models.Settings;
 using Insania.Biology.Models.Mapper;
+using Insania.Biology.Models.Settings;
+using Insania.Biology.Services;
+using Insania.Biology.Tests.Mock.HttpClientFactory;
+using Insania.Biology.Tests.Mock.MemoryCache;
 
 namespace Insania.Biology.Tests.Base;
 
@@ -52,6 +57,9 @@ public abstract class BaseTest
         services.AddSingleton(_ => configuration); //конфигурация
         services.AddScoped<ITransliterationSL, TransliterationSL>(); //сервис транслитерации
         services.AddScoped<IInitializationDAO, InitializationDAO>(); //сервис инициализации данных в бд биологии
+        services.AddSingleton<IMemoryCache>(new MockMemoryCache()); //сервис кэширования
+        services.AddSingleton<IHttpClientFactory>(new MockHttpClientFactory()); //фабрика создания http-запросов
+        services.AddScoped<IFilesSL, FilesSL> (); //сервис работы с файлами
         services.AddBiologyBL(); //сервисы работы с бизнес-логикой в зоне биологии
 
         //Добавление контекстов бд в коллекцию сервисов

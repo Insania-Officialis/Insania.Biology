@@ -62,29 +62,32 @@ services
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            // указывает, будет ли валидироваться издатель при валидации токена
+            //Валидация издателя
             ValidateIssuer = true,
-            // строка, представляющая издателя
+            //Издатель
             ValidIssuer = issuer,
-            // будет ли валидироваться потребитель токена
+            //Валидация потребителя
             ValidateAudience = true,
-            // установка потребителя токена
+            //Потребитель
             ValidAudience = audience,
-            // будет ли валидироваться время существования
+            //Валидация времени существования
             ValidateLifetime = true,
-            // установка ключа безопасности
-            IssuerSigningKey = key,
-            // валидация ключа безопасности
+            //Валидация ключа безопасности
             ValidateIssuerSigningKey = true,
+            //Ключ безопасности
+            IssuerSigningKey = key,
         };
     });
 
 //Внедрение зависимостей сервисов
 services.AddSingleton(_ => configuration); //конфигурация
+services.AddMemoryCache(); //подключение кэширования
+services.AddHttpClient(); //подключение фабрики создания http-клиентов
 services.AddScoped<ITransliterationSL, TransliterationSL>(); //сервис транслитерации
 services.AddSingleton<LoggingSL>(); //сервис логгирование в бд
 services.AddSingleton<ILoggingSL>(provider => provider.GetRequiredService<LoggingSL>()); //подключение сервиса для использования другими сервисами
 services.AddHostedService(provider => provider.GetRequiredService<LoggingSL>()); //подключение сервиса для работы фоном
+services.AddScoped<IFilesSL, FilesSL>(); //сервис работы с файлами
 services.AddBiologyBL(); //сервисы работы с бизнес-логикой в зоне биологии
 
 //Добавление контекстов бд в коллекцию сервисов
@@ -188,7 +191,7 @@ app.UseAuthorization();
 app.UseMiddleware<LoggingMiddleware>(); //логгирование
 app.UseMiddleware<Insania.Shared.Middleware.AuthorizationMiddleware>(); //авторизация
 
-//Подключение сваггера
+//Подключение документации
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {

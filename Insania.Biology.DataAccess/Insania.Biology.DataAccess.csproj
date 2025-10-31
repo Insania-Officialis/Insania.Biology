@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.10" />
     
-    <PackageReference Include="Insania.Shared.Messages" Version="1.0.7" />
+    <PackageReference Include="Insania.Shared.Messages" Version="1.0.9" />
   </ItemGroup>
 
   <ItemGroup>

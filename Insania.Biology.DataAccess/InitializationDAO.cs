@@ -292,7 +292,13 @@ public class InitializationDAO(ILogger<InitializationDAO> logger, BiologyContext
                     [
                         new(_transliteration, 10000, _username, "Удалённый", dateDeleted: DateTime.UtcNow),
                         new(_transliteration, 1, _username, "Ссылка на файловый сервис", "http://192.168.31.234:7082"),
-                        new(_transliteration, 2, _username, "Метод получения файлов", "/files/by_id"),
+                        new(_transliteration, 2, _username, "Метод получения списка типов файлов", "/files_types/list"),
+                        new(_transliteration, 3, _username, "Метод получения списка файлов по идентификатору сущности и идентификатору типа", "/files/list"),
+                        new(_transliteration, 4, _username, "Метод получения файла по идентификатору", "/files/by_id"),
+                        new(_transliteration, 5, _username, "Ссылка на сервис пользователей", "http://192.168.31.234:7080"),
+                        new(_transliteration, 6, _username, "Метод аутентификации", "/authentication/login"),
+                        new(_transliteration, 7, _username, "Логин администратора", "administrator"),
+                        new(_transliteration, 8, _username, "Пароль администратора", "1"),
                     ];
 
                     //Проход по коллекции сущностей

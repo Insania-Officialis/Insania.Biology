@@ -71,6 +71,13 @@ public class Race : Compendium
     public int? MaxAge { get; private set; }
     #endregion
 
+    #region Навигационные свойства
+    /// <summary>
+    /// Навигационное свойство наций
+    /// </summary>
+    public ICollection<Nation>? Nations { get; private set; }
+    #endregion
+
     #region Методы
     /// <summary>
     /// Метод записи описания

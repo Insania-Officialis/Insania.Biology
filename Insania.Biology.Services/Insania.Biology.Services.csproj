@@ -7,14 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.10" />
 
-    <PackageReference Include="Insania.Shared.Messages" Version="1.0.7" />
+    <PackageReference Include="Insania.Shared.Messages" Version="1.0.9" />
+
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Insania.Biology.Contracts\Insania.Biology.Contracts.csproj" />
     <ProjectReference Include="..\Insania.Biology.Database\Insania.Biology.Database.csproj" />
+    <ProjectReference Include="..\Insania.Biology.Messages\Insania.Biology.Messages.csproj" />
   </ItemGroup>
 
 </Project>

@@ -14,7 +14,7 @@ namespace Insania.Biology.Tests.DataAccess;
 [TestFixture]
 public class InitializationDAOTests : BaseTest
 {
-    #region Поля
+    #region Зависимости
     /// <summary>
     /// Сервис инициализации данных в бд биологии
     /// </summary>
@@ -29,6 +29,11 @@ public class InitializationDAOTests : BaseTest
     /// Сервис работы с данными наций
     /// </summary>
     private INationsDAO NationsDAO { get; set; }
+
+    /// <summary>
+    /// Сервис работы с данными параметров
+    /// </summary>
+    private IParametersDAO ParametersDAO { get; set; }
     #endregion
 
     #region Общие методы
@@ -42,6 +47,7 @@ public class InitializationDAOTests : BaseTest
         InitializationDAO = ServiceProvider.GetRequiredService<IInitializationDAO>();
         RacesDAO = ServiceProvider.GetRequiredService<IRacesDAO>();
         NationsDAO = ServiceProvider.GetRequiredService<INationsDAO>();
+        ParametersDAO = ServiceProvider.GetRequiredService<IParametersDAO>();
     }
 
     /// <summary>
@@ -69,13 +75,14 @@ public class InitializationDAOTests : BaseTest
             //Получение сущностей
             List<Race> races = await RacesDAO.GetList();
             List<Nation> nations = await NationsDAO.GetList();
+            List<ParameterBiology> parameters = await ParametersDAO.GetList();
 
             //Проверка результата
-            Assert.Multiple(() =>
+            using (Assert.EnterMultipleScope())
             {
                 Assert.That(races, Is.Not.Empty);
                 Assert.That(nations, Is.Not.Empty);
-            });
+            }
         }
         catch (Exception)
         {
